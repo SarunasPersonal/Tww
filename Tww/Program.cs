@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Reflection;
+using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography.X509Certificates;
 
@@ -15,6 +16,8 @@ namespace Tww
 
 
 
+
+
             Console.WriteLine("--------------------------Welcome to TWW--------------------------\n");
             Console.WriteLine(@"            Press any key to Start to TWW application.");
 
@@ -25,6 +28,8 @@ namespace Tww
 
             void MainMenu()
             {
+               
+
 
                 while (true)
                 {
@@ -179,20 +184,20 @@ namespace Tww
 
 
                         case 1:
-                        {
-                            var user = new User();
-                            Console.WriteLine("Enter User Id: ");
-                            user.UserID = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("Enter full user Name: ");
-                            user.Name = Console.ReadLine();
-                            Console.WriteLine("Enter User address");
-                            user.Address = Console.ReadLine();
-                            Console.WriteLine("Enter user age: ");
-                            user.Age = Convert.ToInt32(Console.ReadLine());
-                            library.AddUser(user);
-                            Console.WriteLine("User added.");
+                            {
+                                var user = new User();
+                                Console.WriteLine("Enter User Id: ");
+                                user.UserID = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("Enter full user Name: ");
+                                user.Name = Console.ReadLine();
+                                Console.WriteLine("Enter User address");
+                                user.Address = Console.ReadLine();
+                                Console.WriteLine("Enter user age: ");
+                                user.Age = Convert.ToInt32(Console.ReadLine());
+                                library.AddUser(user);
+                                Console.WriteLine("User added.");
 
-                        }
+                            }
 
 
 
@@ -220,21 +225,53 @@ namespace Tww
 
             }
 
+
+
             void AddLoan()
             {
-                Console.WriteLine("Enter Start date (mm/dd/yyyy): ");
-                var StartDate = DateTime.Parse(Console.ReadLine());
-                Console.WriteLine("Enter Due date (mm/dd/yyyy): ");
-                var DueDate = DateTime.Parse(Console.ReadLine());
+                Console.Clear();
+
+
+
+
                 Console.WriteLine("Enter User Id:");
-                var UserId =Convert.ToInt32(Console.ReadLine());
+                var userId = Convert.ToInt32(Console.ReadLine());
+                var user = library._users.Find(u => u.UserID == userId);
+                if (user == null)
+                {
+                    Console.WriteLine("Invalid User Id.");
+                }
                 Console.WriteLine("Enter Item Id:");
-                var ItemId = Convert.ToInt32(Console.ReadLine());
+                var itemId = Convert.ToInt32(Console.ReadLine());
+                var item = library._items.Find(i => i.ItemId == itemId);
+                if (user == null)
+                {
+                    Console.WriteLine("Invalid User Id.");
+                }
+
+
+                Console.WriteLine("Enter Start date (mm/dd/yyyy): ");
+                var startDate = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Due date (mm/dd/yyyy): ");
+                var dueDate = DateTime.Parse(Console.ReadLine());
+                var loan = new Loan(startDate, dueDate)
+                {
+                    StartDate = startDate,
+                    DueDate = dueDate
+                };
+                library._loans.Add(loan);
+
+
+
+                
+
+
 
 
 
 
             }
+
 
             void LoanMenu()
             {
@@ -256,27 +293,11 @@ namespace Tww
 
 
                         case 1:
-                        {
-                            var loan = new Loan();
-                            Console.WriteLine("Enter Start date (mm/dd/yyyy): ");
-                            loan.StartDate = DateTime.Parse(Console.ReadLine());
-                            Console.WriteLine("Enter Due date (mm/dd/yyyy): ");
-                            loan.DueDate = DateTime.Parse(Console.ReadLine());
-                            Console.WriteLine("Enter User Id:");
-                            
-                            Console.WriteLine("Enter user age: ");
-                            user.Age = Convert.ToInt32(Console.ReadLine());
-                            library.AddUser(user);
-                            Console.WriteLine("User added.");
-
-                        }
-
-
-
+                            AddLoan();
 
                             break;
                         case 2:
-                            library.DisplayUsers();
+                            library.DisplayLoans();
                             break;
                         case 3:
                             Console.WriteLine("Enter Users Id: ");
@@ -291,15 +312,17 @@ namespace Tww
 
 
                 }
-        }
+            }
 
         }
 
-        
 
 
 
 
-        }
+
     }
+}
+
+
 

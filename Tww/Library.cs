@@ -43,19 +43,7 @@ namespace Tww
             }
         }
 
-
-        public Item? GetItem(string itemNumber)
-        {
-            foreach (var item in _items)
-            {
-                if (item.ItemId == Convert.ToInt32(itemNumber))
-                {
-                    return item;
-                }
-            }
-
-            return null;
-        }
+       
 
         public void DisplayItems()
         {
@@ -71,6 +59,48 @@ namespace Tww
                     Console.WriteLine("Type: {0}\nItem Id: {1}\nTitle: {2}\n" , item.Type,item.ItemId, item.Title );
                 }
             }
+        }
+       
+        public void DisplayLoans()
+        {
+            if (_users.Count == 0)
+            {
+                Console.WriteLine("No user found in the library.");
+            }
+            else
+            {
+                foreach (var user in _users)
+                {
+
+                    Console.WriteLine("User Id: {0}\nName: {1}", user.UserID, user.Name);
+                }
+            }
+            if (_loans.Count == 0)
+            {
+                Console.WriteLine("No loans were issued.");
+            }
+            else
+            {
+                foreach (var loan in _loans)
+                {
+                    Console.WriteLine("Loan issued: {0}:\nDue Date:{1},",loan.StartDate,loan.DueDate);
+                }
+            }
+            if (_items.Count == 0)
+            {
+                Console.WriteLine("No items in the library.");
+            }
+            else
+            {
+                foreach (var item in _items)
+                {
+
+                    Console.WriteLine("Type: {0}\nItem Id: {1}\nTitle: {2}\n", item.Type, item.ItemId, item.Title);
+                }
+            }
+
+
+
         }
 
         public void AddUser(User user)
@@ -107,13 +137,27 @@ namespace Tww
             }
         }
 
-        public void AddLoan(Loan loan)
+        public bool UserIdCheck(int userId)
         {
+            bool exists = false;
+            foreach (var user in _users)
+            {
+                if (user.UserID == userId)
+                {
+                    exists = true;
+                    break;
+                }
+            }
 
+            return exists;
         }
 
 
+
     }
-}
+
+
+    }
+
    
 

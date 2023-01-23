@@ -12,11 +12,19 @@ namespace Tww
     {
         public DateTime StartDate { get; set; }
         public DateTime DueDate { get; set; }
-        public int Fine { get; set; }
-
         public User User { get; set; }
         public Item Item { get; set; }
-       
+
+
+        public Loan(DateTime startDate, DateTime dueDate)
+        {
+            StartDate = startDate.Date;
+            DueDate = dueDate.Date;
+            User = User;
+            Item = Item;
+
+
+        }
 
     }
 }

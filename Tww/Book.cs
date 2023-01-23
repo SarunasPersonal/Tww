@@ -13,8 +13,6 @@ namespace Tww
         public string Author { get; set; }
         public string LiteraryGenre { get; set; }
         public int Pages { get; set; }
-
-        
         
         }
     }
