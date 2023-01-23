@@ -12,6 +12,8 @@ namespace Tww
         public string Address { get; set; }
         public List<Item> _items { get; set; }
         public List<User> _users { get; set; }
+        public List<Loan> _loans { get; set; }
+
 
         public Library(string name, string address)
         {
@@ -19,6 +21,7 @@ namespace Tww
             Address = address;
             _items = new List<Item>();
             _users = new List<User>();
+            _loans = new List<Loan>();
         }
 
         public void AddItem(Item item)
@@ -102,6 +105,11 @@ namespace Tww
             {
                 Console.WriteLine("Users doesn't exists.");
             }
+        }
+
+        public void AddLoan(Loan loan)
+        {
+
         }
 
 

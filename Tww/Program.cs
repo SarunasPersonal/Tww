@@ -12,25 +12,28 @@ namespace Tww
         static void Main(string[] args)
         {
             Library library = new Library("TTT", "www.tww.tww");
-           
+
 
 
             Console.WriteLine("--------------------------Welcome to TWW--------------------------\n");
             Console.WriteLine(@"            Press any key to Start to TWW application.");
 
-            
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
+
+            Console.ReadKey();
+            Console.Clear();
+            MainMenu();
+
             void MainMenu()
-                {
+            {
 
                 while (true)
                 {
                     Console.WriteLine("1.Item Manager.");
                     Console.WriteLine("2.Customer Manager.");
+                    Console.WriteLine("3.Loan Manager.");
                     Console.WriteLine("Enter your option.");
                     int option = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
                     switch (option)
                     {
                         case 1:
@@ -40,6 +43,7 @@ namespace Tww
                             UserMenu();
                             break;
                         case 3:
+                            LoanMenu();
                             break;
                         default:
                             break;
@@ -62,6 +66,7 @@ namespace Tww
                     Console.WriteLine("3.Remove item");
                     Console.WriteLine("4. Main Menu");
                     int option = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
                     Item item;
                     switch (option)
                     {
@@ -103,8 +108,6 @@ namespace Tww
                                 cd.Tracks = Convert.ToInt32(Console.ReadLine());
 
                                 library.AddItem(cd);
-                                Console.WriteLine("Cd added.");
-
 
                             }
 
@@ -127,6 +130,10 @@ namespace Tww
                                 Console.WriteLine("DVD added.");
 
                             }
+                            else
+                            {
+                                Console.WriteLine("Please enter item type: Book, CD, DVD");
+                            }
 
 
 
@@ -146,7 +153,7 @@ namespace Tww
 
                     }
 
-                    Console.WriteLine("\n\n\nPress Enter to go back to Main Menu");
+                    Console.WriteLine("\n\nPress Enter to go back");
                     Console.ReadLine();
                     Console.Clear();
                 }
@@ -163,6 +170,7 @@ namespace Tww
                     Console.WriteLine("1.Create an User");
                     Console.WriteLine("2.View an Users");
                     Console.WriteLine("3.Remove User");
+                    Console.WriteLine("4.Main Menu");
                     int option = Convert.ToInt32(Console.ReadLine());
 
 
@@ -182,10 +190,8 @@ namespace Tww
                             Console.WriteLine("Enter user age: ");
                             user.Age = Convert.ToInt32(Console.ReadLine());
                             library.AddUser(user);
-
-
-
                             Console.WriteLine("User added.");
+
                         }
 
 
@@ -199,20 +205,101 @@ namespace Tww
                             Console.WriteLine("Enter Users Id: ");
                             int userId = Convert.ToInt32(Console.ReadLine());
                             library.RemoveUser(userId);
-                            
                             break;
-                        default:
+                        case 4:
+                            MainMenu();
                             break;
 
                     }
 
-                    Console.WriteLine("\n\n\nPress Enter to go back to Main Menu");
+                    Console.WriteLine("\n\nPress Enter to go back");
                     Console.ReadLine();
                     Console.Clear();
+                }
+
+
+            }
+
+            void AddLoan()
+            {
+                Console.WriteLine("Enter Start date (mm/dd/yyyy): ");
+                var StartDate = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Due date (mm/dd/yyyy): ");
+                var DueDate = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Enter User Id:");
+                var UserId =Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter Item Id:");
+                var ItemId = Convert.ToInt32(Console.ReadLine());
+
+
+
+
+            }
+
+            void LoanMenu()
+            {
+
+                while (true)
+                {
+
+
+
+                    Console.WriteLine("1.Create an Loan");
+                    Console.WriteLine("2.View an Loans");
+                    Console.WriteLine("3.Remove Loan");
+                    Console.WriteLine("4.Main Menu");
+                    int option = Convert.ToInt32(Console.ReadLine());
+
+
+                    switch (option)
+                    {
+
+
+                        case 1:
+                        {
+                            var loan = new Loan();
+                            Console.WriteLine("Enter Start date (mm/dd/yyyy): ");
+                            loan.StartDate = DateTime.Parse(Console.ReadLine());
+                            Console.WriteLine("Enter Due date (mm/dd/yyyy): ");
+                            loan.DueDate = DateTime.Parse(Console.ReadLine());
+                            Console.WriteLine("Enter User Id:");
+                            
+                            Console.WriteLine("Enter user age: ");
+                            user.Age = Convert.ToInt32(Console.ReadLine());
+                            library.AddUser(user);
+                            Console.WriteLine("User added.");
+
+                        }
+
+
+
+
+                            break;
+                        case 2:
+                            library.DisplayUsers();
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter Users Id: ");
+                            int userId = Convert.ToInt32(Console.ReadLine());
+                            library.RemoveUser(userId);
+                            break;
+                        case 4:
+                            MainMenu();
+                            break;
+
+                    }
+
 
                 }
-            }
+        }
+
+        }
+
+        
+
+
+
+
         }
     }
 
-}
