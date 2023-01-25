@@ -11,6 +11,22 @@ namespace Tww
         public int UserID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public int Age { get; set; }    
+        public int Age { get; set; }
+        public User(int userID, string name, string address, int age)
+        {
+            UserID = userID;
+            Name = name;
+            Address = address;
+            Age = age;
+        }
+        public string GetUserDetails()
+        {
+            return $"User ID: {UserID}, Name: {Name}, Address: {Address}, Age: {Age}";
+        }
+
+
+
     }
+
+   
 }
