@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tww
 {
+    //CD class inherits from Item class
     internal class CD : Item
     {
         public string Artist { get; set; }

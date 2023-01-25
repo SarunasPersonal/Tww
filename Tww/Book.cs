@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tww
 {
+    //book class inherits from Item class
 
     internal class Book : Item
 

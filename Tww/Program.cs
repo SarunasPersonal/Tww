@@ -15,13 +15,29 @@ namespace Tww
 
 
 
-
+            //Creating a new library
             Library library = new Library();
+            //Creating new users 
+            User user1 = new User(1, "John", "123 Main Street", 20);
+            User user2 = new User(2, "Mary", "456 Main Street", 25);
+            User user3 = new User(3, "Bob", "789 Main Street", 30);
+            //Creating new items
+            Book book1 = new Book(1, "Harry Potter", "Book", "J.K. Rowling", "Fantasy", 250);
+            Book book2 = new Book(2, "Lord of the Rings", "Book", "J.R.R. Tolkien", "Fantasy", 500);
+            Book book3 = new Book(3, "The Hobbit", "Book", "J.R.R. Tolkien", "Fantasy", 300);
+            //adding users and items to the library
+            library.AddItem(book1);
+            library.AddItem(book2);
+            library.AddItem(book3);
+            library.AddUser(user1);
+            library.AddUser(user2);
+            library.AddUser(user3);
+            
 
 
 
-
-
+            
+            Console.ForegroundColor = ConsoleColor.Green;
 
             Console.WriteLine("--------------------------Welcome to TWW--------------------------\n");
             Console.WriteLine(@"            Press any key to Start to TWW application.");
@@ -35,7 +51,7 @@ namespace Tww
             {
 
 
-
+                //Tww management system Main Menu
                 while (true)
                 {
                     Console.WriteLine("1.Item Manager.");
@@ -63,7 +79,7 @@ namespace Tww
                 }
             }
 
-
+            //Item Menu
             void ItemMenu()
             {
 
@@ -81,6 +97,9 @@ namespace Tww
                     Item item;
                     switch (option)
                     {
+                        //Asks user to enter item type
+                        //Items can be add removed and viewed
+                        //All working
                         case 1:
                             Console.WriteLine("Enter Item type (Book/DVD/CD): ");
                             string itemType = Console.ReadLine();
@@ -164,9 +183,11 @@ namespace Tww
 
                             break;
                         case 2:
+                            //item in _items list can be displayed
                             library.DisplayItems();
                             break;
                         case 3:
+                            //reads item id to remove item
                             Console.WriteLine("Enter Item Id: ");
                             int itemNumber = Convert.ToInt32(Console.ReadLine());
                             library.RemoveItem(itemNumber);
@@ -219,6 +240,7 @@ namespace Tww
 
                             library.AddUser(user);
                             Console.WriteLine("User added.");
+                                Console.Clear();
 
 
                         }
@@ -238,17 +260,23 @@ namespace Tww
 
                     }
 
-                    Console.WriteLine("\n\nPress Enter to go back");
+                    Console.WriteLine("Press Enter to go back");
                     Console.ReadLine();
                     Console.Clear();
+                    UserMenu();
                 }
 
 
             }
 
 
-            
-                   void LoanMenu()
+            //Loan Menu
+            //User can create a loan and add items to loan
+            //User can view all loans
+            // User Should be able to able to return an item. 
+            //Return/Remove loan doesnt work and triggers an error
+
+            void LoanMenu()
                        {
 
 
@@ -272,6 +300,7 @@ namespace Tww
 
                                    case 1:
                                    {
+                                       //uses User id to confirm if it's exists
                                        Console.Clear();
                                        Console.WriteLine("Enter User Id: ");
                                        int id = Convert.ToInt32(Console.ReadLine());
@@ -282,7 +311,7 @@ namespace Tww
                                            return;
                                        }
 
-
+                                       //uses item id to confirm if it's exists
                                        Console.WriteLine("Enter Item Id: ");
                                        int itemIdNum = Convert.ToInt32(Console.ReadLine());
                                        Item? item = library.GetItem(itemIdNum);
@@ -295,35 +324,53 @@ namespace Tww
                                        {
                                            Console.WriteLine("Item found");
                                        }
+                                       
 
-                                       Console.WriteLine("enter start date (mm/dd/yyyy): ");
+                                       Console.WriteLine("Enter start date (dd/mm/yyyy): ");
                                        var startDate = DateTime.Parse(Console.ReadLine());
-                                       Console.WriteLine("Enter Due date (mm/dd/yyyy): ");
-                                       var dueDate = DateTime.Parse(Console.ReadLine());
-                                       Loan loan = new Loan(startDate, dueDate);
+                                //adds 7 days to the start date for return date
+                                var returnDate = startDate.AddDays(7);
+                                //Creates new loan and adds to the library
+                                       Loan loan = new Loan(current,item,startDate, returnDate);
                                        library.AddLoan(loan);
+                                       
+                                       Console.WriteLine("Press Enter to go back");
+                                       Console.ReadLine();
+                                       Console.Clear();
+
                                    }
 
                                        break;
-                                   case 2:
-                                       library.DisplayLoans();
-                                       break;
+                                   case 2: 
+                                       //displays all loans
+                                       library.DisplayLoans(); 
+                                       Console.WriteLine("Press Enter to go back"); 
+                                       Console.ReadLine(); 
+                                       Console.Clear();
+
+
+                            break;
                                    case 3:
-                                       //Console.WriteLine("Enter loan Id: ");
-                                       //int loanId = Convert.ToInt32(Console.ReadLine());
-                                       //library.RemoveLoan(loanId);
+                            //Doesnt removes loan or item from the list
+                            Console.WriteLine("Enter Item id: ");
+                                       int itemId = Convert.ToInt32(Console.ReadLine());
+                                       library.RemoveLoan(itemId);
                                        break;
                                    case 4:
-                                       MainMenu();
-                                       break;
+                                       Console.WriteLine("Press Enter to go back");
+                                       Console.ReadLine();
+                                       Console.Clear();
+                                       UserMenu();
+                            break;
 
-                               }
+
+                    }
 
                            }
                        }
             }
         }
-    }
+}
 
 
 

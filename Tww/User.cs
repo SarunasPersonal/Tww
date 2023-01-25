@@ -8,6 +8,7 @@ namespace Tww
 {
     internal class User 
     {
+        //user class is for the customers in the library
         public int UserID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tww
 {
+    //DVD class inherits from Item class
     internal class DVD : Item
     {
         public string MovieGenre { get; set; }
