@@ -112,11 +112,11 @@ namespace Tww
                 }
             
 
-        }
+            }
         
 
-    }
-    
+        }
+        
 
     public void AddUser(User user)
         //adds user to the _users list
@@ -205,18 +205,6 @@ namespace Tww
             return null;
 
         }
-
-
-        
-
-        
-        
-
-
-
-
-
-
     }
 }
     

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -17,10 +18,11 @@ namespace Tww
         
         public DateTime ReturnDate { get; set; }
         public bool IsReturned { get; set; }
-        
+        public string Fine { get; set; }
 
 
-        public Loan(User user, Item item, DateTime startDate, DateTime returnDate)
+
+        public Loan(User user, Item item, DateTime startDate, DateTime returnDate, string fine)
         {
             User = user;
             Item = item;
@@ -28,9 +30,14 @@ namespace Tww
             StartDate = startDate;
             ReturnDate = returnDate;
             IsReturned = false;
+            Fine = fine;
+
+
         }
-        
-       
+
+
+
+
 
 
 

@@ -277,99 +277,89 @@ namespace Tww
             //Return/Remove loan doesnt work and triggers an error
 
             void LoanMenu()
-                       {
+            {
+                while (true)
+                {
 
 
+                    Console.WriteLine("TWW Managing system. Choose an option by typing a number");
+                    Console.WriteLine("1.Create an Loan");
+                    Console.WriteLine("2.View an Loans");
+                    Console.WriteLine("3.Remove Loan");
+                    Console.WriteLine("4.Main Menu");
+                    int option = Convert.ToInt32(Console.ReadLine());
 
 
-                           while (true)
-                           {
+                    switch (option)
+                    {
 
 
-                               Console.WriteLine("TWW Managing system. Choose an option by typing a number");
-                               Console.WriteLine("1.Create an Loan");
-                               Console.WriteLine("2.View an Loans");
-                               Console.WriteLine("3.Remove Loan");
-                               Console.WriteLine("4.Main Menu");
-                               int option = Convert.ToInt32(Console.ReadLine());
+                        case 1:
+                        {
+                            //uses User id to confirm if it's exists
+                            Console.Clear();
+                            Console.WriteLine("Enter User Id: ");
+                            int id = Convert.ToInt32(Console.ReadLine());
+                            User? current = library.GetUser(id);
+                            if (current == null)
+                            { Console.WriteLine("User not found"); return;
+                            }
 
-
-                               switch (option)
-                               {
-
-
-                                   case 1:
-                                   {
-                                       //uses User id to confirm if it's exists
-                                       Console.Clear();
-                                       Console.WriteLine("Enter User Id: ");
-                                       int id = Convert.ToInt32(Console.ReadLine());
-                                       User? current = library.GetUser(id);
-                                       if (current == null)
-                                       {
-                                           Console.WriteLine("User not found");
-                                           return;
-                                       }
-
-                                       //uses item id to confirm if it's exists
-                                       Console.WriteLine("Enter Item Id: ");
-                                       int itemIdNum = Convert.ToInt32(Console.ReadLine());
-                                       Item? item = library.GetItem(itemIdNum);
-                                       if (item == null)
-                                       {
-                                           Console.WriteLine("Item not found");
-                                           return;
-                                       }
-                                       else
-                                       {
-                                           Console.WriteLine("Item found");
-                                       }
+                            //uses item id to confirm if it's exists
+                            Console.WriteLine("Enter Item Id: ");
+                            int itemIdNum = Convert.ToInt32(Console.ReadLine());
+                            Item? item = library.GetItem(itemIdNum);
+                            if (item == null)
+                            {
+                                Console.WriteLine("Item not found");
+                                return;
+                            }
+                            
                                        
 
-                                       Console.WriteLine("Enter start date (dd/mm/yyyy): ");
-                                       var startDate = DateTime.Parse(Console.ReadLine());
-                                //adds 7 days to the start date for return date
-                                var returnDate = startDate.AddDays(7);
-                                //Creates new loan and adds to the library
-                                       Loan loan = new Loan(current,item,startDate, returnDate);
-                                       library.AddLoan(loan);
+                            Console.WriteLine("Enter start date (dd/mm/yyyy): ");
+                            var startDate = DateTime.Parse(Console.ReadLine());
+                            //adds 7 days to the start date for return date
+                            var returnDate = startDate.AddDays(7);
+                            //Creates new loan and adds to the library
+                            Loan loan = new Loan(current,item,startDate, returnDate);
+                            library.AddLoan(loan);
                                        
-                                       Console.WriteLine("Press Enter to go back");
-                                       Console.ReadLine();
-                                       Console.Clear();
+                            Console.WriteLine("Press Enter to go back");
+                            Console.ReadLine();
+                            Console.Clear();
 
-                                   }
+                        }
 
-                                       break;
-                                   case 2: 
-                                       //displays all loans
-                                       library.DisplayLoans(); 
-                                       Console.WriteLine("Press Enter to go back"); 
-                                       Console.ReadLine(); 
-                                       Console.Clear();
+                            break;
+                        case 2: 
+                            //displays all loans
+                            library.DisplayLoans(); 
+                            Console.WriteLine("Press Enter to go back"); 
+                            Console.ReadLine(); 
+                            Console.Clear();
 
 
                             break;
-                                   case 3:
+                        case 3:
                             //Doesnt removes loan or item from the list
                             Console.WriteLine("Enter Item id: ");
-                                       int itemId = Convert.ToInt32(Console.ReadLine());
-                                       library.RemoveLoan(itemId);
-                                       break;
-                                   case 4:
-                                       Console.WriteLine("Press Enter to go back");
-                                       Console.ReadLine();
-                                       Console.Clear();
-                                       UserMenu();
+                            int itemId = Convert.ToInt32(Console.ReadLine());
+                            library.RemoveLoan(itemId);
                             break;
-
+                        case 4:
+                            Console.WriteLine("Press Enter to go back");
+                            Console.ReadLine();
+                            Console.Clear();
+                            UserMenu();
+                            break;
 
                     }
 
-                           }
-                       }
+                }
             }
         }
+    }
 }
 
 
