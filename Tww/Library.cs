@@ -101,7 +101,7 @@ namespace Tww
                     if (loan.User != null && loan.Item != null)
                     {
                         Console.WriteLine(
-                            "Loan issue Date: {0}\nReturn Date:{1}\nUserId: {2}\nItem Id:{3}\nItem title: {4}\nItem Type: {5}\nReturned?: {6}\n ",
+                            "Loan Issue Date: {0}\nReturn Date:{1}\nUserId: {2}\nItem Id:{3}\nItem Title: {4}\nItem Type: {5}\nReturned?: {6}\n ",
                             loan.StartDate.ToShortDateString(), loan.ReturnDate.ToShortDateString(), loan.User.UserID, loan.Item.ItemId, loan.Item.Title, loan.Item.Type,loan.IsReturned);
                     }
                     

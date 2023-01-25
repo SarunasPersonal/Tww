@@ -18,11 +18,10 @@ namespace Tww
         
         public DateTime ReturnDate { get; set; }
         public bool IsReturned { get; set; }
-        public string Fine { get; set; }
 
 
 
-        public Loan(User user, Item item, DateTime startDate, DateTime returnDate, string fine)
+        public Loan(User user, Item item, DateTime startDate, DateTime returnDate)
         {
             User = user;
             Item = item;
@@ -30,7 +29,6 @@ namespace Tww
             StartDate = startDate;
             ReturnDate = returnDate;
             IsReturned = false;
-            Fine = fine;
 
 
         }
